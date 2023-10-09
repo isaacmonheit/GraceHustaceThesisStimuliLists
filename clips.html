@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .audio-container {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="audio-container">
+        <div class="circle">a</div>
+        <audio id="audioA" controls controlsList="nodownload" onplay="pauseOtherAudio('audioA')"></audio>
+    </div>
+
+    <div class="audio-container">
+        <div class="circle">b</div>
+        <audio id="audioB" controls controlsList="nodownload" onplay="pauseOtherAudio('audioB')"></audio>
+    </div>
+
+    <div class="audio-container">
+        <div class="circle">c</div>
+        <audio id="audioC" controls controlsList="nodownload" onplay="pauseOtherAudio('audioC')"></audio>
+    </div>
+
+    <div class="audio-container">
+        <div class="circle">d</div>
+        <audio id="audioD" controls controlsList="nodownload" onplay="pauseOtherAudio('audioD')"></audio>
+    </div>
+
+    <div class="audio-container">
+        <div class="circle">e</div>
+        <audio id="audioE" controls controlsList="nodownload" onplay="pauseOtherAudio('audioE')"></audio>
+    </div>
+
+    <script>
+        const option = new URLSearchParams(window.location.search).get('option');
+
+        const audios = {
+            1: ["clips/02 - Four80East - Noodle Soup.mp3",
+                "clips/03 - Four80East - Table for Two.mp3",
+                "clips/04 - Four80East - Montreux.mp3",
+                "clips/08 - Four80East - Roll On.mp3",
+                "clips/13 - Four80East - Shakedown.mp3"],
+            2: ["clips/18 - Four80East - One Night Only.mp3",
+                "clips/20 - Four80East - Positraction.mp3",
+                 "clips/21 - Four80East - On the Strip.mp3",
+                  "clips/24 - Four80East - Step in It.mp3",
+                   "clips/28 - Four80East - Survival.mp3"],
+            3: ["clips/29 - Four80East - Sandbar.mp3",
+             "clips/32 - Four80East - Race the Moon.mp3",
+              "clips/36 - Four80East - Never the Same Way Twice.mp3",
+               "clips/38 - Four80East - Rusty Rudder.mp3",
+                "clips/39 - Four80East - Slipstream.mp3"],
+            4: ["clips/41 - Four80East - Mint Julep.mp3",
+             "clips/43 - Four80East - Off Tropic.mp3",
+              "clips/47 - Four80East - Shot in the Dark.mp3",
+               "clips/49 - Four80East - Last Flight to La.mp3", 
+               "clips/50 - Four80East - Sea to Sky.mp3"],
+            5: ["clips/37 - Four80East - Je Pense a Toi.mp3",
+             "clips/35 - Four80East - Hold a Candle.mp3", 
+             "clips/19 - Four80East - En Route.mp3",
+              "clips/16 - Four80East - In the Hidden Garden.mp3",
+               "clips/14 - Four80East - K-Town.mp3"]
+        };
+
+        function setAudioSources() {
+            document.getElementById('audioA').src = audios[option][0];
+            document.getElementById('audioB').src = audios[option][1];
+            document.getElementById('audioC').src = audios[option][2];
+            document.getElementById('audioD').src = audios[option][3];
+            document.getElementById('audioE').src = audios[option][4];
+        }
+
+        function playAudio(audioId) {
+            pauseAllAudios();
+            const audioElement = document.getElementById(audioId);
+            audioElement.play();
+        }
+
+        function pauseOtherAudio(currentAudioId) {
+            const audioElements = document.querySelectorAll('audio');
+            audioElements.forEach(audio => {
+                if (audio.id !== currentAudioId) {
+                    audio.pause();
+                }
+            });
+        }
+
+        setAudioSources();
+    </script>
+</body>
+</html>
